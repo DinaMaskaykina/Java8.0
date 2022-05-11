@@ -38,7 +38,7 @@ class RadioTest {
     }
 
     @Test
-    void next() {
+    void nextMax() {
         Radio model = new Radio();
         model.setCurrentStation(9);
 
@@ -49,11 +49,33 @@ class RadioTest {
     }
 
     @Test
-    void prev() {
+    void next() {
+        Radio model = new Radio();
+        model.setCurrentStation(7);
+
+        int expected = 8;
+        model.next();
+
+        assertEquals(model.getCurrentStation(), expected);
+    }
+
+    @Test
+    void prevMin() {
         Radio model = new Radio();
         model.setCurrentStation(0);
 
         int expected = 9;
+        model.prev();
+
+        assertEquals(model.getCurrentStation(), expected);
+    }
+
+    @Test
+    void prev() {
+        Radio model = new Radio();
+        model.setCurrentStation(7);
+
+        int expected = 6;
         model.prev();
 
         assertEquals(model.getCurrentStation(), expected);
@@ -65,6 +87,28 @@ class RadioTest {
         model.stationInput(7);
 
         int expected = 7;
+        int actual = model.getCurrentStation();
+
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    void stationInputMin() {
+        Radio model = new Radio();
+        model.stationInput(-1);
+
+        int expected = 0;
+        int actual = model.getCurrentStation();
+
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    void stationInputMax() {
+        Radio model = new Radio();
+        model.stationInput(10);
+
+        int expected = 0;
         int actual = model.getCurrentStation();
 
         assertEquals(actual, expected);
